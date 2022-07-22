@@ -1,46 +1,69 @@
 //function for current day and time
-function update() {
-    $('#currentDay').html(moment().format('dddd. MMMM Do YYYY H:mm:ss'));
-  }
-  
-  setInterval(update, 1000);
+$('#currentDay').html(moment().format('LLLL'));
+
 
 //assigned variables
-var saveBtn = $(".saveBtn");
 
-$(document).ready(function() { 
+var saveBtn = $(".saveBtn");
+var time = $(".time-block");
+
+
 //time block to indicate if the event is in the past, present, and future
 function timeBlock() {
-    var hour = moment().hours();
+    var hours = moment().hours();
+
 
     //loop
-    $(".time-block").each(function() {
+    time.each(function () {
         var currentHr = parseInt($(this).attr("id"));
-        
-        if (currentHr < hour) {
+        // console.log(time.each);
+        if (currentHr < hours) {
             $(this).removeClass("future");
             $(this).removeClass("present");
             $(this).addClass("past");
-        } else if (currentHr === hour) {
+        } else if (currentHr === hours) {
             $(this).removeClass("past");
             $(this).removeClass("future");
             $(this).addClass("present");
-        }else {
+        } else {
             $(this).removeClass("present");
             $(this).removeClass("past");
             $(this).addClass("future");
         }
     })
+};
+// console.log(timeBlock);
+
+// save button listener
+saveBtn.on("click", function () {
+
+    var hour = $(this).siblings(".hour").text();
+    var text = $(this).siblings(".text").val();
+
+    localStorage.setItem(hour, text);
+
+// console.log(this);
+// console.log(hour,text);
+// console.log(text);
+});
+
+
+// console.log(saveBtn);
+
+//to have event saved in local storage not be erased
+function eventPlanner() {
+    $(".hour").each(function () {
+        var currentHr = $(this).text();
+        var planner = localStorage.getItem(currentHr);
+
+
+    });
+
+  timeBlock();  
 }
- timeBlock();
-//save button listener
-saveBtn.on("click", function() {
-    var time = $(this).siblings(".hour").val();
-    var text = $(this).siblings(".text");
 
-    localStorage.setItem(time, text);
+eventPlanner();
 
-});
-console.log(saveBtn); 
 
-});
+
+
