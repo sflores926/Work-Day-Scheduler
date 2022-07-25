@@ -21,3 +21,5 @@ THEN the saved events persist
 
 * REPO Link: https://github.com/sflores926/Work-Day-Scheduler
 * Deplyed Link: https://sflores926.github.io/Work-Day-Scheduler/
+
+![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/Work%20Day%20Scheduler.gif)
