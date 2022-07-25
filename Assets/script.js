@@ -1,10 +1,8 @@
 //function for current day and time
 $('#currentDay').html(moment().format('LLLL'));
 
-
-$(document).ready(function() {
+$(document).ready(function() { 
 //assigned variables
-
 var saveBtn = $(".saveBtn");
 // var time = $(".time-block");
 
@@ -12,16 +10,19 @@ var saveBtn = $(".saveBtn");
 //time block to indicate if the event is in the past, present, and future
 function timeBlock() {
     var hour = moment().hours();
+    console.log(hour);
 
-    //loop to c
+    //loop to color code the times
     $(".time-block").each(function () {
         var currentHr = parseInt($(this).attr("id"));
+        console.log(currentHr);
+
         
-        if (hour > currentHr) {
+        if (currentHr < hour) {
             $(this).removeClass("future");
             $(this).removeClass("present");
             $(this).addClass("past");
-        } else if (hour === currentHr) {
+        } else if (currentHr == hour) {
             $(this).removeClass("past");
             $(this).removeClass("future");
             $(this).addClass("present");
@@ -30,7 +31,8 @@ function timeBlock() {
             $(this).removeClass("past");
             $(this).addClass("future");
         }
-        
+        console.log(this);
+    
     })
 };
 // console.log(timeBlock);
@@ -66,11 +68,11 @@ function eventPlanner() {
 
     });
 
-  timeBlock(); 
+ 
 }
 
+timeBlock();  
 eventPlanner();
 
 
-
-});
+})
