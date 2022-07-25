@@ -2,26 +2,26 @@
 $('#currentDay').html(moment().format('LLLL'));
 
 
+$(document).ready(function() {
 //assigned variables
 
 var saveBtn = $(".saveBtn");
-var time = $(".time-block");
+// var time = $(".time-block");
 
 
 //time block to indicate if the event is in the past, present, and future
 function timeBlock() {
-    var hours = moment().hours();
+    var hour = moment().hours();
 
-
-    //loop
-    time.each(function () {
+    //loop to c
+    $(".time-block").each(function () {
         var currentHr = parseInt($(this).attr("id"));
-        // console.log(time.each);
-        if (currentHr < hours) {
+        
+        if (hour > currentHr) {
             $(this).removeClass("future");
             $(this).removeClass("present");
             $(this).addClass("past");
-        } else if (currentHr === hours) {
+        } else if (hour === currentHr) {
             $(this).removeClass("past");
             $(this).removeClass("future");
             $(this).addClass("present");
@@ -30,9 +30,12 @@ function timeBlock() {
             $(this).removeClass("past");
             $(this).addClass("future");
         }
+        
     })
 };
 // console.log(timeBlock);
+// timeBlock();
+
 
 // save button listener
 saveBtn.on("click", function () {
@@ -46,24 +49,28 @@ saveBtn.on("click", function () {
 // console.log(hour,text);
 // console.log(text);
 });
+// console.log(saveBtn);
 
 
 // console.log(saveBtn);
 
-//to have event saved in local storage not be erased
+//to get item from local storage
 function eventPlanner() {
     $(".hour").each(function () {
         var currentHr = $(this).text();
         var planner = localStorage.getItem(currentHr);
 
+        if(currentHr !== null) {
+            $(this).siblings(".text").val(planner);
+        }
 
     });
 
-  timeBlock();  
+  timeBlock(); 
 }
 
 eventPlanner();
 
 
 
-
+});
